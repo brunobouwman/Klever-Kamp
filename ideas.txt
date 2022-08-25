@@ -1,0 +1,34 @@
+Limitações: 
+- Levar em consideração que a custódia terá que ser nossa. (ao inves do usuario);
+- Limite de buckets (aparentemente 1000);
+- Cada bucket tem um hash, necessário interligar o bucket a uma account
+
+Fluxo depósito (transfer para wallet de custody, mantendo uma parte da taxa e a outra para a Klever:
+- Transação para account (custodia) -> Freeze do KLV (gera bucket) -> Interligar sender com bucket hash e salvar 
+num DB -> Escolher se faz delegate (lado positivo: rewards para validador e melhora a distribuição de rewards e conseque
+ntemente a liquidez); 
+
+Fluxo withdraw: Undelegate amount -> unfreeze -> wihdraw -> transfer to user;
+
+How calculate APR? Possible sol: Found a whale to deposit a big amount and split the interest between rewards;
+
+
+Problema e possível solução: Quem paga a taxa de transação no withdraw? Sol: Calcular retorno possível e 
+cobrar valor total no depósito para custear taxa de transação do withdraw, freeze, unfreeze, delegate etc... 
+Another solution: Take the fees straight from the rewards.
+
+
+
+Como diferenciar usuarios que entraram no começo da epoch dos que entraram proximo ao fim. sugestão: Aumento da 
+probabilidade de vencer também relacionado ao tempo de "staking" (além do valor);
+
+---- POSSIBLE SCENARIO
+
+Gather deposits and stake all at once? - Create a "lottery" for the upcoming epoch where no one can enter or get out after it has started.
+Pay attention to deposit limit and delegate it to a single node. Pay prizes to 3-5 users and the rest are automatically relocated to the
+next epoch.
+
+In this method we would need a gap between the "lottery" for reallocation of ticket and allowing new users to join the pool.
+
+Find a way to open the necessary space for new users to join without necessarily using the gap so every epoch is used.
+	
