@@ -23,7 +23,7 @@ const App: React.FC = () => {
     if (!storedValues) {
       const poolsArray: IPool[] = [
         {
-          amount: 25000,
+          amount: 10,
           poolNumber: 4,
           time: Date.now() + 86400000,
           participants: 172,

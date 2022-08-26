@@ -21,36 +21,38 @@ const Account: React.FC = () => {
     useProvider();
   const [rewards, setRewards] = useState(0);
   const [transactions, setTransactions] = useState<ITransaction[]>([]);
-  const defaultAddress = process.env.KUSTODY_WALLET;
 
   useEffect(() => {
     if (getAddress().length === 0) return;
 
-    const url = `https://klever-data.services.klever.io/v1/transactions/KLV/${getAddress()}`;
+    const url = `http://34.72.12.5/v1/transactions/KLV/${getAddress()}`;
 
-    // const config = {
-    //   headers: {
-    //     SECRET: "askhdjt981yhgfs76du1yfw7d6t1utfd1",
-    //   },
-    // };
-
-    // axios
-    //   .get(url, config)
+    const config = {
+      headers: {
+        SECRET: "askhdjt981yhgfs76du1yfw7d6t1utfd1",
+      },
+    };
     axios
-      .get(url)
+      .get(url, config)
       .then((res) => setTransactions(res.data.transactions))
       .catch((err) => console.log(err));
   }, [getAddress()]);
 
   useEffect(() => {
+    console.log(transactions);
     if (transactions.length === 0) return;
 
-    const total = transactions
-      .filter(
-        (tnx) =>
-          tnx.toAddress ===
-          "klv1mz04tw2u6z7fu0eq0l9a5welntpkmak7tcn94ppdp8skmn7heceqsxcace"
-      )
+    const addressTnx = transactions.filter(
+      (tnx) =>
+        tnx.toAddress ===
+        "klv1mz04tw2u6z7fu0eq0l9a5welntpkmak7tcn94ppdp8skmn7heceqsxcace"
+    );
+    if (addressTnx.length === 0) {
+      setDepositAmount(0);
+      return;
+    }
+
+    const total = addressTnx
       .map((tnx) => tnx.amount)
       .reduce((prev, cur) => prev + cur);
     setDepositAmount(Number(total.toFixed(2)));
