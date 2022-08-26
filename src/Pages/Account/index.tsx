@@ -43,8 +43,6 @@ const Account: React.FC = () => {
   useEffect(() => {
     if (transactions.length === 0) return;
 
-    console.log(transactions);
-
     const total = transactions
       .filter(
         (tnx) =>
