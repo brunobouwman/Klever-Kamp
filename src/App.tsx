@@ -17,13 +17,39 @@ const App: React.FC = () => {
 
   useEffect(() => {
     setTimeout(init, 1000);
-    
+
     const storedValues = localStorage.getItem(basePath);
-    if (storedValues) {
-      const parsedValues: IPool[] = JSON.parse(storedValues);
-      const sorted = parsedValues.sort((a, b) => a.amount - b.amount);
-      setPools(sorted);
+
+    if (!storedValues) {
+      const poolsArray: IPool[] = [
+        {
+          amount: 25000,
+          poolNumber: 4,
+          time: Date.now() + 86400000,
+          participants: 172,
+        },
+        {
+          amount: 50000,
+          poolNumber: 5,
+          time: Date.now() + 172800000,
+          participants: 68,
+        },
+        {
+          amount: 100000,
+          poolNumber: 6,
+          time: Date.now() + 259200000,
+          participants: 32,
+        },
+      ];
+
+      const toStore = JSON.stringify(poolsArray);
+      localStorage.setItem(basePath, toStore);
+      return;
     }
+
+    const parsedValues: IPool[] = JSON.parse(storedValues);
+    const sorted = parsedValues.sort((a, b) => a.amount - b.amount);
+    setPools(sorted);
   }, []);
 
   return (
