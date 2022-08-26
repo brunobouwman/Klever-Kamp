@@ -44,12 +44,12 @@ const App: React.FC = () => {
 
       const toStore = JSON.stringify(poolsArray);
       localStorage.setItem(basePath, toStore);
+      setPools(poolsArray);
       return;
     }
 
     const parsedValues: IPool[] = JSON.parse(storedValues);
     const sorted = parsedValues.sort((a, b) => a.amount - b.amount);
-    setPools(sorted);
   }, []);
 
   return (
