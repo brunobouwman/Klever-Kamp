@@ -50,6 +50,7 @@ const App: React.FC = () => {
 
     const parsedValues: IPool[] = JSON.parse(storedValues);
     const sorted = parsedValues.sort((a, b) => a.amount - b.amount);
+    setPools(sorted);
   }, []);
 
   return (
