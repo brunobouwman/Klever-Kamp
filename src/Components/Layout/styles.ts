@@ -24,7 +24,7 @@ export const NavBar = styled.div`
 
 export const LogoContainer = styled.div`
   display: flex;
-  gap: 0.5rem;
+  justify-content: center;
   align-items: center;
   height: 2.5rem;
   padding: 0.2rem;
@@ -34,26 +34,18 @@ export const LogoExtension = styled.div`
   display: flex;
   height: 2.5rem;
   justify-content: center;
-  gap: 0.5rem;
   align-items: flex-end;
 
   > h2 {
     margin-bottom: 0.2rem;
-  }
-
-  > h2:first-of-type {
     color: ${(props) => props.theme.color.primary};
-  }
-
-  > h2:last-of-type {
-    color: white;
   }
 `;
 
 export const SelectionContainer = styled.div`
   display: flex;
   align-items: center;
-  transform: translateX(-55px);
+  transform: translateX(-35px);
   gap: 0.5rem;
   box-shadow: 0 10px 15px -3pxrgba (0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -73,6 +65,13 @@ const selected = css`
   }
 `;
 
+const hover = css`
+  background: rgba(11, 11, 30, 0.2);
+  > span {
+    filter: opacity(1);
+  }
+`;
+
 export const Selection = styled.div<ISelection>`
   display: flex;
   justify-content: center;
@@ -87,10 +86,7 @@ export const Selection = styled.div<ISelection>`
   }
 
   &:hover {
-    background: rgba(11, 11, 30, 0.2);
-    > span {
-      filter: opacity(1);
-    }
+    ${(props) => !props.selected && hover};
   }
 
   ${(props) => props.selected && selected};

@@ -5,6 +5,7 @@ const theme = {
     selection: "#181850",
     white: "#fff",
     offWhite: "#dacdf7",
+    gray: "#cdc5df",
   },
 };
 
