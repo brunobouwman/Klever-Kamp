@@ -28,14 +28,16 @@ const Account: React.FC = () => {
 
     const url = `https://klever-data.services.klever.io/v1/transactions/KLV/${getAddress()}`;
 
-    const config = {
-      headers: {
-        SECRET: "askhdjt981yhgfs76du1yfw7d6t1utfd1",
-      },
-    };
+    // const config = {
+    //   headers: {
+    //     SECRET: "askhdjt981yhgfs76du1yfw7d6t1utfd1",
+    //   },
+    // };
 
+    // axios
+    //   .get(url, config)
     axios
-      .get(url, config)
+      .get(url)
       .then((res) => setTransactions(res.data.transactions))
       .catch((err) => console.log(err));
   }, [getAddress()]);
